@@ -1,0 +1,379 @@
+{
+    "ROTTEN_FLESH": {
+        "npc": "Adventurer",
+        "price": 8,
+        "island": "Hub"
+    },
+    "BONE": {
+        "npc": "Adventurer",
+        "price": 8,
+        "island": "Hub"
+    },
+    "STRING": {
+        "npc": "Adventurer",
+        "price": 10,
+        "island": "Hub"
+    },
+    "SLIME_BALL": {
+        "npc": "Adventurer",
+        "price": 14,
+        "island": "Hub"
+    },
+    "SULPHUR": {
+        "npc": "Adventurer",
+        "price": 10,
+        "island": "Hub"
+    },
+    "NETHER_STALK": {
+        "npc": "Alchemist",
+        "price": 10,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "RABBIT_FOOT": {
+        "npc": "Alchemist",
+        "price": 10,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "SPIDER_EYE": {
+        "npc": "Alchemist",
+        "price": 12,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "GHAST_TEAR": {
+        "npc": "Alchemist",
+        "price": 200,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "MAGMA_CREAM": [
+        {
+            "npc": "Alchemist",
+            "price": 20,
+            "island": "Hub",
+            "location": "Village"
+        },
+        {
+            "npc": "An",
+            "price": 20,
+            "island": "Crimson Isle",
+            "location": "Dragontail"
+        },
+        {
+            "npc": "Ulyn",
+            "price": 20,
+            "island": "Crimson Isle",
+            "location": "Scarleton"
+        }
+    ],
+    "GRAVEL": [
+        {
+            "npc": "Builder",
+            "price": 32,
+            "island": "Hub",
+            "location": "Builder's House"
+        },
+        {
+            "npc": "Mine Merchant",
+            "price": 6,
+            "island": "Hub",
+            "location": "Weaponsmith"
+        },
+        {
+            "npc": "Pat",
+            "price": 4.3,
+            "island": "Hub",
+            "location": "Graveyard"
+        }
+    ],
+    "OBSIDIAN": [
+        {
+            "npc": "Builder",
+            "price": 99,
+            "island": "Hub",
+            "location": "Builder's House"
+        },
+        {
+            "npc": "Pearl Dealer",
+            "price": 50,
+            "island": "The End"
+        }
+    ],
+    "COBBLESTONE": [
+        {
+            "npc": "Builder",
+            "price": 2,
+            "island": "Hub",
+            "location": "Builder's House"
+        },
+        {
+            "npc": "Mine Merchant",
+            "price": 3,
+            "island": "Hub",
+            "location": "Weaponsmith"            
+        }
+    ],
+    "SAND": [
+        {
+            "npc": "Builder",
+            "price": 2,
+            "island": "Hub",
+            "location": "Builder's House"
+        },
+        {
+            "npc": "Farm Merchant",
+            "price": 4,
+            "island": "Hub"
+        }
+    ],
+    "ICE": {
+        "npc": "Builder",
+        "price": 1,
+        "island": "Hub",
+        "location": "Builder's House"
+    },
+    "PACKED_ICE": {
+        "npc": "Builder",
+        "price": 9,
+        "island": "Hub",
+        "location": "Builder's House"
+    },
+    "YELLOW_FLOWER": {
+        "npc": "Builder",
+        "price": 50,
+        "island": "Hub",
+        "location": "Builder's House"
+    },
+    "RED_ROSE": {
+        "npc": "Builder",
+        "price": 50,
+        "island": "Hub",
+        "location": "Builder's House"
+    },
+    "SPONGE": {
+        "npc": "Builder",
+        "price": 800,
+        "island": "Hub",
+        "location": "Builder's House"
+    },
+    "WHEAT": {
+        "npc": "Farm Merchant",
+        "price": 10,
+        "island": "Hub"
+    },
+    "CARROT_ITEM": {
+        "npc": "Farm Merchant",
+        "price": 10,
+        "island": "Hub"
+    },
+    "POTATO_ITEM": {
+        "npc": "Farm Merchant",
+        "price": 10,
+        "island": "Hub"
+    },
+    "MELON": {
+        "npc": "Farm Merchant",
+        "price": 4,
+        "island": "Hub"
+    },
+    "SUGAR_CANE": {
+        "npc": "Farm Merchant",
+        "price": 10,
+        "island": "Hub"
+    },
+    "PUMPKIN": {
+        "npc": "Farm Merchant",
+        "price": 25,
+        "island": "Hub"
+    },
+    "INK_SACK:3": {
+        "npc": "Farm Merchant",
+        "price": 5,
+        "island": "Hub"
+    },
+    "RED_MUSHROOM": {
+        "npc": "Farm Merchant",
+        "price": 25,
+        "island": "Hub"
+    },
+    "BROWN_MUSHROOM": {
+        "npc": "Farm Merchant",
+        "price": 25,
+        "island": "Hub"
+    },
+    "CACTUS": {
+        "npc": "Farm Merchant",
+        "price": 15,
+        "island": "Hub"
+    },
+    "ENCHANTED_BONE_MEAL": {
+        "npc": "Farm Merchant",
+        "price": 2,
+        "island": "Hub"
+    },
+    "RAW_FISH": {
+        "npc": "Fish Merchant",
+        "price": 20,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "RAW_FISH:1": {
+        "npc": "Fish Merchant",
+        "price": 30,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "RAW_FISH:2": {
+        "npc": "Fish Merchant",
+        "price": 100,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "RAW_FISH:3": {
+        "npc": "Fish Merchant",
+        "price": 40,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "EXP_BOTTLE": {
+        "npc": "Librarian",
+        "price": 30,
+        "island": "Hub",
+        "location": "Library"
+    },
+    "LOG": {
+        "npc": "Lumber Merchant",
+        "price": 5,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "LOG:2": {
+        "npc": "Lumber Merchant",
+        "price": 5,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "LOG:1": {
+        "npc": "Lumber Merchant",
+        "price": 5,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "LOG_2:1": {
+        "npc": "Lumber Merchant",
+        "price": 5,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "LOG_2": {
+        "npc": "Lumber Merchant",
+        "price": 5,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "LOG:3": {
+        "npc": "Lumber Merchant",
+        "price": 5,
+        "island": "Hub",
+        "location": "Village"
+    },
+    "REDSTONE": {
+        "npc": "Mad Redstone Engineer",
+        "price": 4,
+        "island": "Hub",
+        "location": "Builder's House"
+    },
+    "COAL": {
+        "npc": "Mine Merchant",
+        "price": 4,
+        "island": "Hub",
+        "location": "Weaponsmith"
+    },
+    "IRON_INGOT": [
+        {
+            "npc": "Mine Merchant",
+            "price": 5.5,
+            "island": "Hub",
+            "location": "Weaponsmith"
+        },
+        {
+            "npc": "Iron Forger",
+            "price": 5,
+            "island": "Gold Mine"
+        }
+    ],
+    "GOLD_INGOT": [
+        {
+            "npc": "Mine Merchant",
+            "price": 6,
+            "island": "Hub",
+            "location": "Weaponsmith"
+        },
+        {
+            "npc": "Gold Forger",
+            "price": 5.5,
+            "island": "Gold Mine"
+        }
+    ],
+    "ONYX": {
+        "npc": "Mine Merchant",
+        "price": 100,
+        "island": "Hub",
+        "location": "Weaponsmith"
+    },
+    "SUPERBOOM_TNT": [
+        {
+            "npc": "Ophelia",
+            "price": 3000,
+            "island": "Hub",
+            "location": "Catacombs Entrance"
+        },
+        {
+            "npc": "Walter",
+            "price": 2500,
+            "island": "Deep Caverns",
+            "location": "Gunpowder Mines"
+        }
+    ],
+    "FLINT": {
+        "npc": "Pat",
+        "price": 6,
+        "island": "Hub",
+        "location": "Graveyard"
+    },
+    "REFINED_AMBER": {
+        "npc": "Smithmonger",
+        "price": 1000000,
+        "island": "Hub",
+        "location": "Blacksmith"
+    },
+    "BLESSED_FRUIT": {
+        "npc": "Smithmonger",
+        "price": 1000000,
+        "island": "Hub",
+        "location": "Blacksmith"
+    },
+    "WOOL": {
+        "npc": "Wool Weaver",
+        "price": 32,
+        "island": "Hub",
+        "location": "Builder's House"
+    },
+    "ENCHANTMENT_DRAGON_HUNTER_1": {
+        "npc": "Pearl Dealer",
+        "price": 1000000,
+        "island": "The End"
+    },
+    "ENCHANTMENT_ENDER_SLAYER_6": {
+        "npc": "Pearl Dealer",
+        "price": 1500000,
+        "island": "The End"
+    },
+    "ENDER_STONE": {
+        "npc": "Pearl Dealer",
+        "price": 10,
+        "island": "The End"
+    }
+}
