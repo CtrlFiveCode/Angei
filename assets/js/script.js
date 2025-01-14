@@ -188,8 +188,3 @@ function getItemImage(product_id) {
 
 document.addEventListener('DOMContentLoaded', fetchData);
 setInterval(fetchData, 2000); // Set up interval to refresh data every 2 seconds
-
-document.getElementById('price-type-toggle').addEventListener('change', (event) => {
-    priceType = event.target.value;
-    fetchData(); // Fetch new data based on selected price type
-});
