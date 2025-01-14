@@ -6,7 +6,6 @@
 
 let itemData = {};
 let priceType = 'sell_order'; // Default price type
-let lastUpdateTime = new Date(); // Initialize with the current time
 
 /*
 
@@ -24,14 +23,6 @@ function formatTimeAgo(milliseconds) {
     if (minutes < 60) return `${minutes} min ago`;
     if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
     return `${days} day${days > 1 ? 's' : ''} ago`;
-}
-
-function updateLastUpdatedTime() {
-    const now = new Date();
-    const elapsedTime = now - lastUpdateTime; // Elapsed time in milliseconds
-    const formattedTime = formatTimeAgo(elapsedTime);
-
-    document.getElementById('last-updated').innerText = `Last updated: ${formattedTime}`;
 }
 
 /*
@@ -85,9 +76,6 @@ async function fetchData() {
     console.log('Bazaar Products:', products); // Add this
     
     updateItemCards(products, npcItems);
-
-    lastUpdateTime = new Date();
-    updateLastUpdatedTime();
 }
 
 /*
@@ -98,43 +86,49 @@ async function fetchData() {
 
 function updateItemCards(products, npcItems) {
     const itemCardsContainer = document.getElementById('item-cards');
-    itemCardsContainer.innerHTML = '';
+    itemCardsContainer.innerHTML = ''; // Clear existing cards
 
     const cards = Object.keys(products).flatMap(key => {
         const item = products[key];
         if (!item) return []; // Skip if item is missing
 
-        const { product_id, buy_summary = [], sell_summary = [] } = item;
+        const { product_id, sell_summary = [] } = item;
         const npcItemsList = npcItems[product_id];
         if (!npcItemsList) return []; // Skip if no NPC items
 
-        const priceData = priceType === 'sell_order' ? buy_summary[0] : sell_summary[0];
+        const priceData = sell_summary[0]; // Use the first entry in sell_summary for insta-sell price
         if (!priceData) return []; // Skip if no price data
 
-        const pricePerUnit = priceData.pricePerUnit || 0;
+        const pricePerUnit = priceData.pricePerUnit || 0; // Insta-sell price
         const npcItemsArray = Array.isArray(npcItemsList) ? npcItemsList : [npcItemsList];
 
         return npcItemsArray.flatMap(npcItem => {
-            const buyPrice = npcItem.price || 0;
+            const buyPrice = npcItem.price || 0; // NPC buy price
             const profitMargin = calculateProfitMargin(pricePerUnit, buyPrice);
-            if (profitMargin <= 0.1) return []; // Skip low profit margin items
+            if (profitMargin <= 0) return []; // Skip low profit margin items
 
-            return [createCardElement(product_id, pricePerUnit, buyPrice, profitMargin, npcItem)];
+            const dailyProfit = calculateDailyProfit(profitMargin); // Calculate daily profit
+            return [createCardElement(product_id, pricePerUnit, buyPrice, profitMargin, dailyProfit, npcItem)];
         });
     });
 
-    cards.sort((a, b) => b.profitMargin - a.profitMargin);
+    cards.sort((a, b) => b.profitMargin - a.profitMargin); // Sort by highest profit margin
     cards.forEach(card => itemCardsContainer.appendChild(card.element));
 }
 
 function calculateProfitMargin(pricePerUnit, buyPrice) {
-    return pricePerUnit - buyPrice - 0.1;
+    return pricePerUnit - buyPrice;
 }
 
-function createCardElement(product_id, pricePerUnit, buyPrice, profitMargin, npcItem) {
+function calculateDailyProfit(profitMargin) {
+    return profitMargin * 640; // Multiply by daily purchase limit
+}
+
+function createCardElement(product_id, pricePerUnit, buyPrice, profitMargin, dailyProfit, npcItem) {
     const formattedBuyPrice = formatPrice(buyPrice);
     const formattedSellPrice = formatPrice(pricePerUnit);
     const formattedProfitMargin = formatPrice(profitMargin);
+    const formattedDailyProfit = formatPrice(dailyProfit);
 
     const card = document.createElement('div');
     card.className = 'card';
@@ -148,8 +142,12 @@ function createCardElement(product_id, pricePerUnit, buyPrice, profitMargin, npc
         <hr>
         <div class="card-price-info">
             <p><span>Buy Price:</span><span>${formattedBuyPrice}</span></p>
-            <p><span>${priceType === 'sell_order' ? 'Sell Price' : 'Sell Price'}:</span><span>${formattedSellPrice}</span></p>
+            <p><span>Sell Price:</span><span>${formattedSellPrice}</span></p>
+        </div>
+        <hr>
+        <div class="card-price-info">
             <p><span>Profit Margin:</span><span>${formattedProfitMargin}</span></p>
+            <p><span>Daily Profit:</span><span>${formattedDailyProfit}</span></p>
         </div>
         <hr>
         <div class="card-npc-info">
@@ -189,18 +187,9 @@ function getItemImage(product_id) {
 */
 
 document.addEventListener('DOMContentLoaded', fetchData);
-setInterval(fetchData, 60000); // Set up interval to refresh data every 60 seconds
-setInterval(updateLastUpdatedTime, 1000); // Set up an interval to update the "Last updated" time every second
+setInterval(fetchData, 2000); // Set up interval to refresh data every 2 seconds
 
 document.getElementById('price-type-toggle').addEventListener('change', (event) => {
     priceType = event.target.value;
     fetchData(); // Fetch new data based on selected price type
-});
-
-document.getElementById('open-sidebar').addEventListener('click', () => {
-    document.getElementById('filter-sidebar').classList.add('show');
-});
-
-document.getElementById('close-sidebar').addEventListener('click', () => {
-    document.getElementById('filter-sidebar').classList.remove('show');
 });
