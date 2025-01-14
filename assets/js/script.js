@@ -33,7 +33,7 @@ function formatTimeAgo(milliseconds) {
 
 async function fetchItemData() {
     try {
-        const response = await fetch('./data/item_data.json')
+        const response = await fetch('/data/item_data.json')
         itemData = await response.json();
     } catch (error) {
         console.error('Error fetching item data:', error);
@@ -42,7 +42,7 @@ async function fetchItemData() {
 
 async function fetchNpcItems() {
     try {
-        const response = await fetch('./data/npc_items.json');
+        const response = await fetch('/data/npc_items.json');
         return await response.json();
     } catch (error) {
         console.error('Error fetching NPC items data:', error);
