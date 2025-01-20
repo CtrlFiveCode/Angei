@@ -12,13 +12,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
 </head>
 <body>
-    <header>
+    <header role="banner">
         <h1>NPC to Bazaar</h1>
+        <div id="toggle-container">
+            <span id="toggle-label">Insta Sell</span>
+            <label class="toggle" for="view-toggle">
+                <input type="checkbox" id="view-toggle" checked>
+                <span class="slider"></span>
+            </label>
+            <span id="toggle-label">Sell Order</span>
+        </div>
     </header>
     <main>
-        <section id="item-cards">
+        <section id="item-cards" role="main">
             <!-- Item Cards Here -->
         </section>
+        <div id="loading-indicator" style="display: none;">Loading...</div> <!-- Loading Indicator -->
+        <div id="error-message" style="display: none; color: red;"></div> <!-- Error Message -->
     </main>
     <script src="/assets/js/script.js"></script>
 </body>

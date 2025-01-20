@@ -5,25 +5,9 @@
 */
 
 let itemData = {};
-let priceType = 'sell_order'; // Default price type
-
-/*
-
-✦─────⋅☾ Helper Functions ☽⋅─────✦
-
-*/
-
-function formatTimeAgo(milliseconds) {
-    const seconds = Math.floor(milliseconds / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    if (seconds < 60) return `${seconds} secs ago`;
-    if (minutes < 60) return `${minutes} min ago`;
-    if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    return `${days} day${days > 1 ? 's' : ''} ago`;
-}
+let currentView = 'sell-order'; // Default view
+const API_URL = 'https://api.hypixel.net/v2/skyblock/bazaar';
+const cooldownDuration = 3000; // Cooldown duration in milliseconds
 
 /*
 
@@ -33,10 +17,11 @@ function formatTimeAgo(milliseconds) {
 
 async function fetchItemData() {
     try {
-        const response = await fetch('/data/item_data.json')
+        const response = await fetch('/data/item_data.json');
         itemData = await response.json();
     } catch (error) {
         console.error('Error fetching item data:', error);
+        displayError('Failed to load item data. Please try again later.');
     }
 }
 
@@ -46,13 +31,14 @@ async function fetchNpcItems() {
         return await response.json();
     } catch (error) {
         console.error('Error fetching NPC items data:', error);
+        
         return {}; // Return an empty object in case of error
     }
 }
 
 async function fetchBazaarData() {
     try {
-        const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
+        const response = await fetch(API_URL);
         const data = await response.json();
         
         if (!data.success) {
@@ -62,20 +48,21 @@ async function fetchBazaarData() {
         return data.products;
     } catch (error) {
         console.error('Error fetching Bazaar data:', error);
+        displayError('Failed to load Bazaar data. Please try again later.');
         return {}; // Return an empty object in case of error
     }
 }
 
 async function fetchData() {
     console.log('Fetching new data...');
+    showLoadingIndicator(); // Show loading indicator
 
     await fetchItemData();
     const npcItems = await fetchNpcItems();
-    console.log('NPC Items:', npcItems); // Add this
     const products = await fetchBazaarData();
-    console.log('Bazaar Products:', products); // Add this
     
     updateItemCards(products, npcItems);
+    hideLoadingIndicator(); // Hide loading indicator
 }
 
 /*
@@ -92,28 +79,49 @@ function updateItemCards(products, npcItems) {
         const item = products[key];
         if (!item) return []; // Skip if item is missing
 
-        const { product_id, sell_summary = [] } = item;
+        const { product_id, sell_summary = [], buy_summary = [] } = item;
         const npcItemsList = npcItems[product_id];
         if (!npcItemsList) return []; // Skip if no NPC items
 
-        const priceData = sell_summary[0]; // Use the first entry in sell_summary for insta-sell price
-        if (!priceData) return []; // Skip if no price data
+        // Use the first entry in sell_summary for insta sell price
+        const instaPriceData = sell_summary[0];
+        const sellPrice = instaPriceData ? instaPriceData.pricePerUnit : 0;
+        if (!instaPriceData) return []; // Skip if no price data
 
-        const pricePerUnit = priceData.pricePerUnit || 0; // Insta-sell price
+        // Use the first entry in buy_summary for sell order price
+        const orderPriceData = buy_summary[0];
+        const orderPrice = orderPriceData ? orderPriceData.pricePerUnit : 0;
+        if (!orderPriceData) return []; // Skip if no price data
+
         const npcItemsArray = Array.isArray(npcItemsList) ? npcItemsList : [npcItemsList];
 
         return npcItemsArray.flatMap(npcItem => {
             const buyPrice = npcItem.price || 0; // NPC buy price
-            const profitMargin = calculateProfitMargin(pricePerUnit, buyPrice);
-            if (profitMargin <= 0) return []; // Skip low profit margin items
 
-            const dailyProfit = calculateDailyProfit(profitMargin); // Calculate daily profit
-            return [createCardElement(product_id, pricePerUnit, buyPrice, profitMargin, dailyProfit, npcItem)];
+            // Calculate profit margin using Insta Sell price
+            const instaProfitMargin = calculateProfitMargin(sellPrice, buyPrice);
+
+            // Only include items that can be Insta Sold for Profit
+            if (instaProfitMargin <= 0) return []; // Skip low profit margin items
+
+            // Choose the profit margin based on the current view
+            const profitMargin = currentView === 'insta-sell'
+                ? instaProfitMargin 
+                : calculateProfitMargin(orderPrice, buyPrice);
+
+            // Calculate daily profit based on the selected profit margin
+            const dailyProfit = calculateDailyProfit(profitMargin);
+                
+            return [createCardElement(product_id, sellPrice, orderPrice, buyPrice, profitMargin, dailyProfit, npcItem)];
         });
     });
 
     cards.sort((a, b) => b.profitMargin - a.profitMargin); // Sort by highest profit margin
-    cards.forEach(card => itemCardsContainer.appendChild(card.element));
+
+    // Use a document fragment for better performance
+    const fragment = document.createDocumentFragment();
+    cards.forEach(card => fragment.appendChild(card.element));
+    itemCardsContainer.appendChild(fragment);
 }
 
 function calculateProfitMargin(pricePerUnit, buyPrice) {
@@ -124,9 +132,9 @@ function calculateDailyProfit(profitMargin) {
     return profitMargin * 640; // Multiply by daily purchase limit
 }
 
-function createCardElement(product_id, pricePerUnit, buyPrice, profitMargin, dailyProfit, npcItem) {
+function createCardElement(product_id, sellPrice, orderPrice, buyPrice, profitMargin, dailyProfit, npcItem) {
     const formattedBuyPrice = formatPrice(buyPrice);
-    const formattedSellPrice = formatPrice(pricePerUnit);
+    const formattedSellPrice = formatPrice(currentView === 'insta-sell' ? sellPrice : orderPrice);
     const formattedProfitMargin = formatPrice(profitMargin);
     const formattedDailyProfit = formatPrice(dailyProfit);
 
@@ -151,9 +159,8 @@ function createCardElement(product_id, pricePerUnit, buyPrice, profitMargin, dai
         </div>
         <hr>
         <div class="card-npc-info">
-            <p><span>Island:</span><span>${npcItem.island || 'N/A'}</span></p>
             <p><span>NPC:</span><span>${npcItem.npc || 'N/A'}</span></p>
-            ${npcItem.location ? `<p><span>Location:</span><span>${npcItem.location}</span></p>` : ''}
+            <p><span>Island:</span><span>${npcItem.island || 'N/A'}</span></p>
         </div>
     `;
 
@@ -180,6 +187,22 @@ function getItemImage(product_id) {
     return item && item.image ? `/assets/images/${item.image}` : ''; // Return item image path or default
 }
 
+function displayError(message) {
+    const errorContainer = document.getElementById('error-message');
+    errorContainer.textContent = message;
+    errorContainer.style.display = 'block'; // Show error message
+}
+
+function showLoadingIndicator() {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.display = 'block'; // Show loading indicator
+}
+
+function hideLoadingIndicator() {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.display = 'none'; // Hide loading indicator
+}
+
 /*
 
 ✦─────⋅☾ Initialization ☽⋅─────✦
@@ -187,4 +210,29 @@ function getItemImage(product_id) {
 */
 
 document.addEventListener('DOMContentLoaded', fetchData);
-setInterval(fetchData, 2000); // Set up interval to refresh data every 2 seconds
+setInterval(fetchData, 10000); // Set up interval to refresh data every 10 seconds
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Set the initial view based on the checkbox state
+    currentView = document.getElementById('view-toggle').checked ? 'sell-order' : 'insta-sell';
+    fetchData(); // Fetch data on page load
+});
+
+document.getElementById('view-toggle').addEventListener('change', (event) => {
+    const toggleButton = document.getElementById('view-toggle');
+    const slider = toggleButton.nextElementSibling; // Get the slider element
+
+    // Disable the toggle button and apply the disabled class
+    toggleButton.disabled = true; // Disable the toggle
+    slider.classList.add('disabled'); // Add disabled class to the slider
+
+    // Update the current view based on the toggle
+    currentView = event.target.checked ? 'sell-order' : 'insta-sell'; 
+    fetchData(); // Re-fetch data to update the displayed cards
+
+    // Set a timeout to re-enable the toggle button after cooldown duration
+    setTimeout(() => {
+        toggleButton.disabled = false; // Re-enable the toggle
+        slider.classList.remove('disabled'); // Remove disabled class from the slider
+    }, cooldownDuration); // Use the defined cooldown duration
+});
