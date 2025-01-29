@@ -1,218 +1,218 @@
 {
     "ROTTEN_FLESH": {
         "name": "Rotten Flesh",
-        "image": "Rotten Flesh.png"
+        "image": "https://wiki.hypixel.net/images/d/db/Minecraft_items_rotten_flesh.png"
     },
     "BONE": {
         "name": "Bone",
-        "image": "Bone.png"
+        "image": "https://wiki.hypixel.net/images/7/7b/Minecraft_items_bone.png"
     },
     "STRING": {
         "name": "String",
-        "image": "String.png"
+        "image": "https://wiki.hypixel.net/images/f/f3/Minecraft_items_string.png"
     },
     "SLIME_BALL": {
         "name": "Slimeball",
-        "image": "Slimeball.png"
+        "image": "https://wiki.hypixel.net/images/a/a1/Minecraft_items_slimeball.png"
     },
     "SULPHUR": {
         "name": "Gunpowder",
-        "image": "Gunpowder.png"
+        "image": "https://wiki.hypixel.net/images/1/11/Minecraft_items_gunpowder.png"
     },
     "NETHER_STALK": {
         "name": "Nether Wart",
-        "image": "Nether Wart.png"
+        "image": "https://wiki.hypixel.net/images/f/f3/Minecraft_items_nether_wart.png"
     },
     "RABBIT_FOOT": {
         "name": "Rabbit's Foot",
-        "image": "Rabbit's Foot.png"
+        "image": "https://wiki.hypixel.net/images/7/7e/Minecraft_items_rabbits_foot.png"
     },
     "SPIDER_EYE": {
         "name": "Spider Eye",
-        "image": "Spider Eye.png"
+        "image": "https://wiki.hypixel.net/images/a/ab/Minecraft_items_spider_eye.png"
     },
     "GHAST_TEAR": {
         "name": "Ghast Tear",
-        "image": "Ghast Tear.png"
+        "image": "https://wiki.hypixel.net/images/b/b0/Minecraft_items_ghast_tear.png"
     },
     "MAGMA_CREAM": {
         "name": "Magma Cream",
-        "image": "Magma Cream.png"
+        "image": "https://wiki.hypixel.net/images/7/7e/Minecraft_items_magma_cream.png"
     },
     "GRAVEL": {
         "name": "Gravel",
-        "image": "Gravel.png"
+        "image": "https://wiki.hypixel.net/images/8/89/Minecraft_items_gravel.png"
     },
     "OBSIDIAN": {
         "name": "Obsidian",
-        "image": "Obsidian.png"
+        "image": "https://wiki.hypixel.net/images/1/1d/Minecraft_items_obsidian.png"
     },
     "COBBLESTONE": {
         "name": "Cobblestone",
-        "image": "Cobblestone.png"
+        "image": "https://wiki.hypixel.net/images/0/0b/Minecraft_items_cobblestone.png"
     },
     "SAND": {
         "name": "Sand",
-        "image": "Sand.png"
+        "image": "https://wiki.hypixel.net/images/c/c8/Minecraft_items_sand.png"
     },
     "ICE": {
         "name": "Ice",
-        "image": "Ice.png"
+        "image": "https://wiki.hypixel.net/images/b/be/Minecraft_items_ice.png"
     },
     "PACKED_ICE": {
         "name": "Packed Ice",
-        "image": "Packed Ice.png"
+        "image": "https://wiki.hypixel.net/images/b/bc/Minecraft_items_packed_ice.png"
     },
     "YELLOW_FLOWER": {
         "name": "Dandelion",
-        "image": "Dandelion.png"
+        "image": "https://wiki.hypixel.net/images/2/2f/Minecraft_items_dandelion.png"
     },
     "RED_ROSE": {
         "name": "Poppy",
-        "image": "Poppy.png"
+        "image": "https://wiki.hypixel.net/images/4/4d/Minecraft_items_poppy.png"
     },
     "SPONGE": {
         "name": "Sponge",
-        "image": "Sponge.png"
+        "image": "https://wiki.hypixel.net/images/0/06/Minecraft_items_sponge.png"
     },
     "WHEAT": {
         "name": "Wheat",
-        "image": "Wheat.png"
+        "image": "https://wiki.hypixel.net/images/4/4e/Minecraft_items_wheat.png"
     },
     "CARROT_ITEM": {
         "name": "Carrot",
-        "image": "Carrot.png"
+        "image": "https://wiki.hypixel.net/images/7/7b/Minecraft_items_carrot.png"
     },
     "POTATO_ITEM": {
         "name": "Potato",
-        "image": "Potato.png"
+        "image": "https://wiki.hypixel.net/images/d/d1/Minecraft_items_potato.png"
     },
     "MELON": {
         "name": "Melon",
-        "image": "Melon.png"
+        "image": "https://wiki.hypixel.net/images/c/c0/Minecraft_items_melon_slice.png"
     },
     "SUGAR_CANE": {
         "name": "Sugar Cane",
-        "image": "Sugar Cane.png"
+        "image": "https://wiki.hypixel.net/images/f/fb/Minecraft_items_sugar_cane.png"
     },
     "PUMPKIN": {
         "name": "Pumpkin",
-        "image": "Pumpkin.png"
+        "image": "https://wiki.hypixel.net/images/f/f4/Minecraft_items_carved_pumpkin.png"
     },
     "INK_SACK:3": {
         "name": "Cocoa Beans",
-        "image": "Cocoa Beans.png"
+        "image": "https://wiki.hypixel.net/images/5/58/Minecraft_items_cocoa_beans.png"
     },
     "RED_MUSHROOM": {
         "name": "Red Mushroom",
-        "image": "Red Mushroom.png"
+        "image": "https://wiki.hypixel.net/images/2/2a/Minecraft_items_red_mushroom.png"
     },
     "BROWN_MUSHROOM": {
         "name": "Brown Mushroom",
-        "image": "Brown Mushroom.png"
+        "image": "https://wiki.hypixel.net/images/d/d3/Minecraft_items_brown_mushroom.png"
     },
     "CACTUS": {
         "name": "Cactus",
-        "image": "Cactus.png"
+        "image": "https://wiki.hypixel.net/images/6/60/Minecraft_items_cactus.png"
     },
     "ENCHANTED_BONE_MEAL": {
         "name": "Enchanted Bone Meal",
-        "image": "Enchanted Bone Meal.gif"
+        "image": "https://wiki.hypixel.net/images/4/49/SkyBlock_items_enchanted_bonemeal.gif"
     },
     "RAW_FISH": {
         "name": "Raw Fish",
-        "image": "Raw Fish.png"
+        "image": "https://wiki.hypixel.net/images/0/02/Minecraft_items_raw_cod.png"
     },
     "RAW_FISH:1": {
         "name": "Raw Salmon",
-        "image": "Raw Salmon.png"
+        "image": "https://wiki.hypixel.net/images/8/8e/Minecraft_items_raw_salmon.png"
     },
     "RAW_FISH:2": {
         "name": "Clownfish",
-        "image": "Clownfish.png"
+        "image": "https://wiki.hypixel.net/images/6/6e/Minecraft_items_tropical_fish.png"
     },
     "RAW_FISH:3": {
         "name": "Pufferfish",
-        "image": "Pufferfish.png"
+        "image": "https://wiki.hypixel.net/images/b/ba/Minecraft_items_pufferfish.png"
     },
     "EXP_BOTTLE": {
         "name": "Experience Bottle",
-        "image": "Experience Bottle.gif"
+        "image": "https://wiki.hypixel.net/images/6/6a/Minecraft_items_exp_bottle.png"
     },
     "LOG": {
         "name": "Oak Wood",
-        "image": "Oak Wood.png"
+        "image": "https://wiki.hypixel.net/images/8/8d/Minecraft_items_oak_log.png"
     },
     "LOG:2": {
         "name": "Birch Wood",
-        "image": "Birch Wood.png"
+        "image": "https://wiki.hypixel.net/images/0/0c/Minecraft_items_birch_log.png"
     },
     "LOG:1": {
         "name": "Spruce Wood",
-        "image": "Spruce Wood.png"
+        "image": "https://wiki.hypixel.net/images/5/5d/Minecraft_items_spruce_log.png"
     },
     "LOG_2:1": {
         "name": "Dark Oak Wood",
-        "image": "Dark Oak Wood.png"
+        "image": "https://wiki.hypixel.net/images/0/08/Minecraft_items_dark_oak_log.png"
     },
     "LOG_2": {
         "name": "Acacia Wood",
-        "image": "Acacia Wood.png"
+        "image": "https://wiki.hypixel.net/images/b/b6/Minecraft_items_acacia_log.png"
     },
     "LOG:3": {
         "name": "Jungle Wood",
-        "image": "Jungle Wood.png"
+        "image": "https://wiki.hypixel.net/images/d/d5/Minecraft_items_jungle_log.png"
     },
     "REDSTONE": {
         "name": "Redstone",
-        "image": "Redstone.png"
+        "image": "https://wiki.hypixel.net/images/8/87/Minecraft_items_redstone_dust.png"
     },
     "COAL": {
         "name": "Coal",
-        "image": "Coal.png"
+        "image": "https://wiki.hypixel.net/images/e/ee/Minecraft_items_coal.png"
     },
     "IRON_INGOT": {
         "name": "Iron Ingot",
-        "image": "Iron Ingot.png"
+        "image": "https://wiki.hypixel.net/images/4/46/Minecraft_items_iron_ingot.png"
     },
     "GOLD_INGOT": {
         "name": "Gold Ingot",
-        "image": "Gold Ingot.png"
+        "image": "https://wiki.hypixel.net/images/4/4f/Minecraft_items_gold_ingot.png"
     },
     "ONYX": {
         "name": "Black Diamond",
-        "image": "Black Diamond.png"
+        "image": "https://wiki.hypixel.net/images/3/33/SkyBlock_items_onyx.png"
     },
     "SUPERBOOM_TNT": {
         "name": "Superboom TNT",
-        "image": "Superboom TNT.gif"
+        "image": "https://wiki.hypixel.net/images/6/6c/SkyBlock_items_enchanted_tnt.gif"
     },
     "FLINT": {
         "name": "Flint",
-        "image": "Flint.png"
+        "image": "https://wiki.hypixel.net/images/e/ed/Minecraft_items_flint.png"
     },
     "REFINED_AMBER": {
         "name": "Refined Amber",
-        "image": "Refined Amber.png"
+        "image": "https://wiki.hypixel.net/images/7/7e/SkyBlock_items_refined_amber.png"
     },
     "BLESSED_FRUIT": {
         "name": "Blessed Fruit",
-        "image": "Blessed Fruit.png"
+        "image": "https://wiki.hypixel.net/images/f/f7/SkyBlock_items_blessed_fruit.png"
     },
     "WOOL": {
         "name": "White Wool",
-        "image": "White Wool.png"
+        "image": "https://wiki.hypixel.net/images/f/fe/Minecraft_items_white_wool.png"
     },
     "ENCHANTMENT_DRAGON_HUNTER_1": {
         "name": "Dragon Hunter I",
-        "image": "Enchanted Book.gif"
+        "image": "https://wiki.hypixel.net/images/4/4e/SkyBlock_items_enchanted_book.gif"
     },
     "ENCHANTMENT_ENDER_SLAYER_6": {
         "name": "Ender Slayer VI",
-        "image": "Enchanted Book.gif"
+        "image": "https://wiki.hypixel.net/images/4/4e/SkyBlock_items_enchanted_book.gif"
     },
     "ENDER_STONE": {
         "name": "End Stone",
-        "image": "End Stone.png"
+        "image": "https://wiki.hypixel.net/images/b/ba/Minecraft_items_end_stone.png"
     }
 }
