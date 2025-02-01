@@ -60,7 +60,7 @@ We have exciting plans for the future! Here are the features we aim to add:
 
 ## Join Our Community
 
-We’re building Angei SkyHelper with the community in mind, and your feedback is important! Join our Discord server, [FiveCode Labs](https://discord.gg/SRHrAVF5), to:
+We’re building Angei SkyHelper with the community in mind, and your feedback is important! Join our Discord server, [FiveCode Labs](https://discord.gg/WDbS6B5Fnu), to:
 
 - Share your thoughts and suggestions.
 - Stay updated on the latest developments.
