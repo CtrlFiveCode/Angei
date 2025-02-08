@@ -59,7 +59,7 @@ async function fetchStaticData() {
 
 */
 
-function loadStaticData() {
+async function loadStaticData() {
     const storedItemData = localStorage.getItem('itemData');
     const storedNpcItems = localStorage.getItem('npcItems');
     const lastUpdate = localStorage.getItem('lastUpdate');
@@ -70,15 +70,13 @@ function loadStaticData() {
     if (storedItemData && storedNpcItems && lastUpdate) {
         const lastUpdateDate = new Date(lastUpdate);
         if (now - lastUpdateDate < MONTH) {
-            // Use stored data if it's less than a month old
             itemData = JSON.parse(storedItemData);
             npcItems = JSON.parse(storedNpcItems);
-            return; // Exit if we are using stored data
+            return;
         }
     }
 
-    // Fetch new data if not available or outdated
-    fetchStaticData();
+    await fetchStaticData(); // Fetch if data is outdated
 }
 
 /*
@@ -133,23 +131,37 @@ function updateItemCards(products, npcItems) {
     const itemCardsContainer = document.getElementById('item-cards');
     itemCardsContainer.innerHTML = ''; // Clear existing cards
 
-    const cards = Object.keys(products).reduce((acc, key) => {
-        const item = products[key];
-        if (!item) return acc; // Skip if item is missing
+    // Create an array to store the card data
+    const cards = [];
 
-        const { product_id, sell_summary = [], buy_summary = [] } = item;
+    Object.keys(products).forEach(key => {
+        const item = products[key];
+        if (!item) return; // Skip if item is missing
+
+        const { product_id, sell_summary = [], buy_summary = [], quick_status = {} } = item;
         const npcItemsList = npcItems[product_id];
-        if (!npcItemsList) return acc; // Skip if no NPC items
+        if (!npcItemsList) return; // Skip if no NPC items
+
+        // Retrieve sell and buy volumes from quick_status
+        const sellVolume = quick_status.sellVolume || 0;
+        const buyVolume = quick_status.buyVolume || 0;
+
+        // Define minimum threshold for sell and buy volume
+        const MIN_SELL_VOLUME = 16000; // Minimum sell volume threshold
+        const MIN_BUY_VOLUME = 16000; // Minimum buy volume threshold
+
+        // Skip items that have low sell or buy volume
+        if (sellVolume < MIN_SELL_VOLUME || buyVolume < MIN_BUY_VOLUME) return;
 
         // Use the first entry in sell_summary for insta sell price
         const instaPriceData = sell_summary[0];
         const sellPrice = instaPriceData ? instaPriceData.pricePerUnit : 0;
-        if (!instaPriceData) return acc; // Skip if no price data
+        if (!instaPriceData) return; // Skip if no price data
 
         // Use the first entry in buy_summary for sell order price
         const orderPriceData = buy_summary[0];
         const orderPrice = orderPriceData ? orderPriceData.pricePerUnit : 0;
-        if (!orderPriceData) return acc; // Skip if no price data
+        if (!orderPriceData) return; // Skip if no price data
 
         const npcItemsArray = Array.isArray(npcItemsList) ? npcItemsList : [npcItemsList];
 
@@ -159,28 +171,36 @@ function updateItemCards(products, npcItems) {
             // Calculate profit margin using Insta Sell price
             const instaProfitMargin = calculateProfitMargin(sellPrice, buyPrice);
 
-            // Only include items that can be Insta Sold for Profit
-            if (instaProfitMargin <= 0) return; // Skip low profit margin items
+            // Calculate profit margin for sell orders
+            const sellOrderProfitMargin = calculateProfitMargin(orderPrice, buyPrice);
+
+            // Only include items that can be Insta Sold or Sell Ordered for Profit
+            if (instaProfitMargin <= 0 && sellOrderProfitMargin <= 0) return; // Skip items with no profit
 
             // Choose the profit margin based on the current view
             const profitMargin = currentView === 'insta-sell'
-                ? instaProfitMargin 
-                : calculateProfitMargin(orderPrice, buyPrice);
+                ? instaProfitMargin
+                : sellOrderProfitMargin;
 
             // Calculate daily profit based on the selected profit margin
             const dailyProfit = calculateDailyProfit(profitMargin);
-                
-            acc.push(createCardElement(product_id, sellPrice, orderPrice, buyPrice, profitMargin, dailyProfit, npcItem));
+
+            // Only add cards with positive profit margin
+            if (profitMargin > 0) {
+                const card = createCardElement(product_id, sellPrice, orderPrice, buyPrice, profitMargin, dailyProfit, npcItem);
+                cards.push({ element: card.element, profitMargin }); // Add to cards array
+            }
         });
+    });
 
-        return acc;
-    }, []);
-
-    cards.sort((a, b) => b.profitMargin - a.profitMargin); // Sort by highest profit margin
+    // Sort cards by profit margin (highest to lowest)
+    cards.sort((a, b) => b.profitMargin - a.profitMargin);
 
     // Use a document fragment for better performance
     const fragment = document.createDocumentFragment();
-    cards.forEach(card => fragment.appendChild(card.element));
+    cards.forEach(card => fragment.appendChild(card.element)); // Append sorted cards
+
+    // Append the document fragment to the container
     itemCardsContainer.appendChild(fragment);
 }
 
@@ -190,6 +210,16 @@ function calculateProfitMargin(pricePerUnit, buyPrice) {
 
 function calculateDailyProfit(profitMargin) {
     return profitMargin * 640; // Multiply by daily purchase limit
+}
+
+function calculateSellSpeed(item) {
+    // Calculate the buy volume for the past week
+    const buyVolume = item.buy_summary ? item.buy_summary[0].amount : 0;
+
+    // Divide the buy volume by 10,080 (minutes in a week) to get the sell speed
+    const sellSpeed = buyVolume / 10080;
+
+    return sellSpeed;
 }
 
 function createCardElement(product_id, sellPrice, orderPrice, buyPrice, profitMargin, dailyProfit, npcItem) {
